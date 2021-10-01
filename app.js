@@ -1,17 +1,12 @@
 const express = require('express')
+const logger = require("morgan");
 require('./models/db')
 const app = express()
 app.use(express.json())
 PORT=process.env.PORT 
 
-
-const Middelwear = (req, res, next) => {
-    console.log(`URL:-${req.url}   Method:-${req.method}`)
-    next();
-}
-
-// show url or method.
-app.use(Middelwear)
+// show method and 
+app.use(logger("dev"));
 
 // user Routs middlewear
 const user = require('./Routes/user_routs')

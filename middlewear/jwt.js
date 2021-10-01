@@ -19,5 +19,4 @@ exports.authenticateToken = (req, res, next) => {
     req.data = data
     next()
   });
-
 }
