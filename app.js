@@ -1,16 +1,27 @@
 const express = require('express')
-const routs = require('./Routes/todo_routs')
+require('./models/db')
 const app = express()
 app.use(express.json())
-const user = require('./Routes/user_routs')
+PORT=process.env.PORT 
+
+
 const Middelwear = (req, res, next) => {
-    console.log(`Middelwear  ${req.url}  ${req.method} ${new Date()}`)
+    console.log(`URL:-${req.url}   Method:-${req.method}`)
     next();
 }
+
+// show url or method.
 app.use(Middelwear)
-app.use(user,routs)
+
+// user Routs middlewear
+const user = require('./Routes/user_routs')
+app.use("/user",user)
+
+// tido Routs middlewear.
+const routs = require('./Routes/todo_routs')
+app.use("/todo",routs)
 
 
-app.listen(2021, () => {
-    console.log("server start at 2021");
+app.listen(PORT, () => {
+    console.log(`server start at ${PORT}`);
 })
